@@ -10,7 +10,7 @@ const ModalItem = ({ current, clearCurrent }) => {
             {
                 current ? <div className="modal">
                     <div className="modal-info">
-                        <h3 className="name">{current.Country}</h3>
+                        <h3 className="name">{current.Country.length > 19 ? current.Country.substr(0,19) + "..." : current.Country}</h3>
                         <div className="totalCon">
                             <div className="icon"><RiHeartPulseFill /> <p>Total Confirmed:</p></div>
                             <p>{current.TotalConfirmed}</p>
