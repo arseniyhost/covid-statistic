@@ -20,6 +20,15 @@ header .menu {
 }
 
 .search {
+    position: relative;
+}
+
+.search svg {
+    position: absolute;
+    font-size: 30px;
+    color: #b2b2b2;
+    right: 5%;
+    top: 20%;
 }
 
 .search input {

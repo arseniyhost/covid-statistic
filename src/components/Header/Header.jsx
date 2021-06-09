@@ -1,6 +1,7 @@
 import React from 'react'
 import "./Header.css"
 import Logo from '../../images/logo.png'
+import { BiSearch } from 'react-icons/bi'
 
 const Header = ({ setValue }) => {
     return (
@@ -13,6 +14,7 @@ const Header = ({ setValue }) => {
                     </div>
                 </div>
                 <div className="search">
+                    <BiSearch />
                     <input onChange={e => setValue(e.target.value)} type="text" placeholder="Search..." />
                 </div>
             </div>
