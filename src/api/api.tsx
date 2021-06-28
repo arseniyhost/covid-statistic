@@ -1,0 +1,1 @@
+export const API_URL:string = "https://api.covid19api.com/summary";

@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { FC } from 'react'
 import "./Header.css"
 import Logo from '../../images/logo.png'
 import { BiSearch } from 'react-icons/bi'
 
-const Header = ({ setValue }) => {
+interface HeaderProps {
+    setValue: (value: string) => void
+}
+
+const Header: FC<HeaderProps> = ({ setValue }) => {
     return (
         <header>
             <div className="menu">

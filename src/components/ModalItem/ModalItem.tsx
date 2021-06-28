@@ -1,16 +1,23 @@
-import React from 'react'
+import React, { FC } from 'react'
 import "./ModalItem.css";
 import { RiHeartPulseFill } from 'react-icons/ri';
 import { GiDeathJuice } from 'react-icons/gi';
 import { FiFilePlus } from 'react-icons/fi'
+import { ICountry } from '../../types';
 
-const ModalItem = ({ current, clearCurrent }) => {
+interface ModalItemProps {
+    current: ICountry
+    children?: React.ReactNode
+    clearCurrent: () => void
+}
+
+const ModalItem: FC<ModalItemProps> = ({ current, clearCurrent }) => {
     return (
         <>
             {
                 current ? <div className="modal">
                     <div className="modal-info">
-                        <h3 className="name">{current.Country.length > 19 ? current.Country.substr(0,19) + "..." : current.Country}</h3>
+                        <h3 className="name">{current.Country.length > 19 ? current.Country.substr(0, 19) + "..." : current.Country}</h3>
                         <div className="totalCon">
                             <div className="icon"><RiHeartPulseFill /> <p>Total Confirmed:</p></div>
                             <p>{current.TotalConfirmed}</p>

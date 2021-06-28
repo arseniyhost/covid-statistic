@@ -3,11 +3,14 @@ import Header from './components/Header/Header';
 import Item from './components/Item/Item';
 import ModalItem from './components/ModalItem/ModalItem';
 import "./App.css";
+import { API_URL } from './api/api';
+import { ICountry } from './types';
+import axios from 'axios';
 
-function App() {
-  const [items, setItems] = useState([]);
-  const [current, setCurrent] = useState(null);
-  const [value, setValue] = useState('');
+const App: React.FC = () => {
+  const [items, setItems] = useState<ICountry[]>([]);
+  const [current, setCurrent] = useState<object>({});
+  const [value, setValue] = useState<string>('');
 
   useEffect(() => {
     getItems();
@@ -15,7 +18,7 @@ function App() {
   }, [])
 
   useEffect(() => {
-    const body = document.querySelector('body');
+    const body = document.body
     if (current) {
       body.style.overflow = "hidden";
     } else {
@@ -23,21 +26,19 @@ function App() {
     }
   }, [current])
 
-  const getItems = () => {
-    fetch('https://api.covid19api.com/summary')
-      .then(res => res.json())
-      .then(result => {
-        setItems(result.Countries)
-      })
+  const getItems = async () => {
+      const response = await axios.get<ICountry[]>(API_URL);
+
+      setItems(response.data);
   }
 
 
-  const currentCountry = (item) => {
+  const currentCountry = (item: any) => {
     setCurrent(item);
   }
 
   const clearCurrent = () => {
-    setCurrent('');
+    setCurrent({});
   }
 
   const filteredItems = items && items.filter(item => {
@@ -48,7 +49,7 @@ function App() {
     <div className="App">
       <Header setValue={setValue} />
       {
-        current ? <ModalItem clearCurrent={clearCurrent} current={current} /> : ''
+        // current ? <ModalItem clearCurrent={clearCurrent} current={current} /> : ''
       }
       <div className="table-info">
         <table>
@@ -65,12 +66,9 @@ function App() {
                 return <Item
                   id={index + 1}
                   key={item.ID}
-                  id_item={item.ID}
-                  modalInfo={item}
                   total={item.TotalConfirmed}
                   country={item.Country}
                   currentCountry={currentCountry}
-                  current={current}
                   item={item}
                 />
               }) : <div>Loading...</div>
